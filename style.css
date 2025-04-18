@@ -1,0 +1,195 @@
+/* Base Styles */
+body {
+    font-family: 'Montserrat', sans-serif; /* Modern, clean font */
+    color: #333;
+    margin: 0;
+    background: #f7f7f7; /* Light grey background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 2.8em;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.input-group {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="password"],
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    transition: border-color 0.3s ease;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #3498db; /* Focus color */
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+button {
+    padding: 16px 32px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Strength Bar Styles */
+.strength-bar-container {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.strength-bar {
+    height: 18px;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#strengthBar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s ease-in-out, background-color 0.3s ease;
+}
+
+#strengthBar.weak::before {
+    background-color: #e74c3c; /* Red */
+    width: 33%;
+}
+
+#strengthBar.medium::before {
+    background-color: #f39c12; /* Orange */
+    width: 66%;
+}
+
+#strengthBar.strong::before {
+    background-color: #2ecc71; /* Green */
+    width: 100%;
+}
+
+#strengthLabel {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1em;
+}
+
+/* Weak/Medium Message and Suggestions (Page 1) */
+#weakMessage {
+    color: #e74c3c;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+#suggestionsList {
+    margin-top: 20px;
+    padding-left: 20px;
+    color: #777;
+    text-align: left;
+    list-style-type: disc;
+}
+
+#suggestionsList strong {
+    color: #3498db;
+}
+
+#suggestionButton {
+    margin-top: 30px;
+}
+
+/* Suggestion Section (Page 2) */
+.suggestion-section h2 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.4em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+#suggestions {
+    margin-top: 30px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#suggestions p {
+    margin-bottom: 15px;
+}
+
+#suggestions strong {
+    color: #2ecc71; /* Highlighted suggested passwords */
+}
+
+a {
+    display: inline-block;
+    margin-top: 30px;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Specific Styles for Page 2 Container */
+body.suggestion-page .container {
+    background: linear-gradient(135deg, #f0f8ff, #e6f9ff); /* Light blue gradient */
+}
+
+body.suggestion-page h1 {
+    color: #3498db;
+}

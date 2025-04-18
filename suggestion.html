@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Strong Password</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="suggestion-page">
+    <div class="container suggestion-section">
+        <h2>Generate a Strong Password</h2>
+        <p>Please provide some details to help us create a memorable and strong password for you.</p>
+        <div class="input-group">
+            <label for="keyword">Enter a memorable keyword:</label>
+            <input type="text" id="keyword" placeholder="e.g., favorite pet, hobby">
+        </div>
+        <div class="input-group">
+            <label for="number">Enter a significant number (e.g., year, date):</label>
+            <input type="number" id="number" placeholder="e.g., 1995, 25">
+        </div>
+        <div class="input-group">
+            <label for="symbol">Enter a special symbol (e.g., !, @, #, $):</label>
+            <input type="text" id="symbol" maxlength="1" placeholder="e.g., !, @">
+        </div>
+        <button id="generateButton">Generate Suggestions</button>
+        <div id="suggestions">
+            </div>
+        <a href="index.html">Go Back to Password Checker</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const keywordInput = document.getElementById('keyword');
+            const numberInput = document.getElementById('number');
+            const symbolInput = document.getElementById('symbol');
+            const generateButton = document.getElementById('generateButton');
+            const suggestionsDiv = document.getElementById('suggestions');
+
+            generateButton.addEventListener('click', function() {
+                const keyword = keywordInput.value.trim();
+                const number = numberInput.value.trim();
+                const symbol = symbolInput.value.trim();
+
+                if (keyword && number && symbol) {
+                    const suggestions = generatePasswordSuggestions(keyword, number, symbol);
+                    displaySuggestions(suggestions);
+                } else {
+                    suggestionsDiv.innerHTML = '<p style="color: #e74c3c;">Please fill in all the details.</p>';
+                }
+            });
+
+            function generatePasswordSuggestions(keyword, number, symbol) {
+                const suggestions = new Set();
+                const lowerKeyword = keyword.toLowerCase();
+                const upperKeyword = keyword.toUpperCase();
+                const capitalizedKeyword = keyword.charAt(0).toUpperCase() + keyword.slice(1).toLowerCase();
+
+                suggestions.add(`${lowerKeyword}${number}${symbol}`);
+                suggestions.add(`${upperKeyword}${symbol}${number}`);
+                suggestions.add(`${capitalizedKeyword}${number}${symbol}${lowerKeyword.slice(0, 2)}`);
+                suggestions.add(`${symbol}${number}${upperKeyword}`);
+                suggestions.add(`${lowerKeyword.slice(0, 3)}${symbol}${number}${upperKeyword.slice(-2)}`);
+                suggestions.add(`${number}${symbol}${capitalizedKeyword}`);
+
+                return Array.from(suggestions);
+            }
+
+            function displaySuggestions(suggestions) {
+                suggestionsDiv.innerHTML = '<h3>Strong Password Suggestions:</h3>';
+                suggestions.forEach(suggestion => {
+                    suggestionsDiv.innerHTML += `<p><strong>${suggestion}</strong></p>`;
+                });
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const weakPassword = urlParams.get('weakPassword');
+            if (weakPassword) {
+                console.log("Weak Password from previous page:", weakPassword);
+                // You could use this weak password to potentially refine suggestions further.
+            }
+        });
+    </script>
+</body>
+</html>
