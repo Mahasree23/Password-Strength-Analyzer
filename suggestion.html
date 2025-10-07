@@ -29,57 +29,6 @@
         <a href="index.html">Go Back to Password Checker</a>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const keywordInput = document.getElementById('keyword');
-            const numberInput = document.getElementById('number');
-            const symbolInput = document.getElementById('symbol');
-            const generateButton = document.getElementById('generateButton');
-            const suggestionsDiv = document.getElementById('suggestions');
-
-            generateButton.addEventListener('click', function() {
-                const keyword = keywordInput.value.trim();
-                const number = numberInput.value.trim();
-                const symbol = symbolInput.value.trim();
-
-                if (keyword && number && symbol) {
-                    const suggestions = generatePasswordSuggestions(keyword, number, symbol);
-                    displaySuggestions(suggestions);
-                } else {
-                    suggestionsDiv.innerHTML = '<p style="color: #e74c3c;">Please fill in all the details.</p>';
-                }
-            });
-
-            function generatePasswordSuggestions(keyword, number, symbol) {
-                const suggestions = new Set();
-                const lowerKeyword = keyword.toLowerCase();
-                const upperKeyword = keyword.toUpperCase();
-                const capitalizedKeyword = keyword.charAt(0).toUpperCase() + keyword.slice(1).toLowerCase();
-
-                suggestions.add(`${lowerKeyword}${number}${symbol}`);
-                suggestions.add(`${upperKeyword}${symbol}${number}`);
-                suggestions.add(`${capitalizedKeyword}${number}${symbol}${lowerKeyword.slice(0, 2)}`);
-                suggestions.add(`${symbol}${number}${upperKeyword}`);
-                suggestions.add(`${lowerKeyword.slice(0, 3)}${symbol}${number}${upperKeyword.slice(-2)}`);
-                suggestions.add(`${number}${symbol}${capitalizedKeyword}`);
-
-                return Array.from(suggestions);
-            }
-
-            function displaySuggestions(suggestions) {
-                suggestionsDiv.innerHTML = '<h3>Strong Password Suggestions:</h3>';
-                suggestions.forEach(suggestion => {
-                    suggestionsDiv.innerHTML += `<p><strong>${suggestion}</strong></p>`;
-                });
-            }
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const weakPassword = urlParams.get('weakPassword');
-            if (weakPassword) {
-                console.log("Weak Password from previous page:", weakPassword);
-                // You could use this weak password to potentially refine suggestions further.
-            }
-        });
-    </script>
+    <script src="suggestion.js"></script>
 </body>
 </html>
